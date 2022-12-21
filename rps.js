@@ -39,7 +39,6 @@ function playRound(playerSelection, computerSelection){
 
 	if (playerSelection === computerSelection) winner = "" // player and cpu picks same choice
 	else { // not a tie
-
 		// find the winning choice
 		winnerChoice = rules(playerSelection, computerSelection);
 
@@ -50,30 +49,34 @@ function playRound(playerSelection, computerSelection){
 	return winner;
 }
 
+
 function game(){
 	let playerScore = 0;
 	let computerScore = 0;
-	let tieCounter = 0;
+	let tieScore = 0;
 
 	while(playerScore < 5 && computerScore < 5){
 		let winner = playRound(getPlayerChoice(), getComputerChoice());
 
 		if(winner == "computer") computerScore++;
 		else if(winner == "player") playerScore++;
-		else tieCounter++;
+		else tieScore++;
 
 		if(winner) console.log(winner + " wins!");
 		else console.log("it's a tie!");
 
-		console.log("Scoreboard: ")
+		console.log("Current scoreboard: ");
 		console.log("Computer score: " + computerScore);
-		console.log("Player score: " + playerScore)
+		console.log("Player score: " + playerScore);
 	}
+	printResults(computerScore, playerScore, tieScore);
+}
 
+function printResults(computerScore, playerScore, tieScore){
 	console.log("Final results: ");
 	console.log("Computer score: " + computerScore);
 	console.log("Player Score: " + playerScore);
-	console.log("You tied: " + tieCounter + " time(s)")
+	console.log("You tied: " + tieScore + " time(s)")
 }
 
 game();
