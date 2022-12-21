@@ -1,6 +1,3 @@
-console.log("Hello World!");
-
-
 function getComputerChoice(){
 	let choice;
 	let choiceRandomized = Math.floor(Math.random() * 3)
@@ -23,18 +20,63 @@ function getPlayerChoice(){
 	return input;
 }
 
-function playRound(playerSelection, computerSelection){
-	playerSelection = playerSelection.toLowerCase();
-
-	console.log("Computer choice: " + computerSelection)
-	console.log("Player choice: " + playerSelection)
-	if(playerSelection === computerSelection) console.log("Tie!")
-	else console.log("Not a tie")
+function rules(a, b){
+	let winnerChoice;
+	if((a == "rock" || b == "rock") && (a == "scissors" || b == "scissors")) winnerChoice = "rock" // rock vs scissors > rock wins
+	else if ((a == "scissors" || b == "scissors") && (a == "paper" || b == "paper")) winnerChoice = "scissors" // scissors vs paper > scissors wins
+	else if ((a == "rock" || b == "rock") && (a == "paper" || b == "paper")) winnerChoice = "paper" // rock vs paper > paper wins
+	else winnerChoice = "not valid"
+	return winnerChoice;
 }
 
+function playRound(playerSelection, computerSelection){
+	playerSelection = playerSelection.toLowerCase();
+	let winnerChoice; // holds the winning choice
+	let winner;
 
+	console.log("Computer picks: " + computerSelection)
+	console.log("Player picks: " + playerSelection)
 
-playRound(getPlayerChoice(), getComputerChoice());
+	if (playerSelection === computerSelection) winner = "" // player and cpu picks same choice
+	else { // not a tie
+
+		// find the winning choice
+		winnerChoice = rules(playerSelection, computerSelection);
+
+		// determine who picked the winning choice
+		if(computerSelection == winnerChoice) winner = "computer"
+		else if (playerSelection == winnerChoice) winner = "player"
+	} 
+	return winner;
+}
+
+function game(){
+	let playerScore = 0;
+	let computerScore = 0;
+	let tieCounter = 0;
+
+	while(playerScore < 5 && computerScore < 5){
+		let winner = playRound(getPlayerChoice(), getComputerChoice());
+
+		if(winner == "computer") computerScore++;
+		else if(winner == "player") playerScore++;
+		else tieCounter++;
+
+		if(winner) console.log(winner + " wins!");
+		else console.log("it's a tie!");
+
+		console.log("Scoreboard: ")
+		console.log("Computer score: " + computerScore);
+		console.log("Player score: " + playerScore)
+	}
+
+	console.log("Final results: ");
+	console.log("Computer score: " + computerScore);
+	console.log("Player Score: " + playerScore);
+	console.log("You tied: " + tieCounter + " time(s)")
+}
+
+game();
 
 
 
