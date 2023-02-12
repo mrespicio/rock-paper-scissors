@@ -30,7 +30,7 @@ function rules(a, b){
 }
 
 function playRound(playerSelection, computerSelection){
-	playerSelection = playerSelection.toLowerCase();
+	//playerSelection = playerSelection.toLowerCase();
 	let winnerChoice; // holds the winning choice
 	let winner;
 
@@ -55,7 +55,7 @@ function game(){
 	let computerScore = 0;
 	let tieScore = 0;
 
-	while(playerScore < 5 && computerScore < 5){
+	//while(playerScore < 5 && computerScore < 5){
 		let winner = playRound(getPlayerChoice(), getComputerChoice());
 
 		if(winner == "computer") computerScore++;
@@ -68,16 +68,27 @@ function game(){
 		console.log("Current scoreboard: ");
 		console.log("Computer score: " + computerScore);
 		console.log("Player score: " + playerScore);
-	}
-	printResults(computerScore, playerScore, tieScore);
+	//}
+	//printResults(computerScore, playerScore, tieScore);
 }
 
+/*
 function printResults(computerScore, playerScore, tieScore){
 	console.log("Final results: ");
 	console.log("Computer score: " + computerScore);
 	console.log("Player Score: " + playerScore);
 	console.log("You tied: " + tieScore + " time(s)")
+} */
+
+function tester(){
+	console.log('tester');
 }
+const buttons = document.querySelectorAll('button'); // select all buttons
+
+// add event listeners to buttons, buttons is parameters
+buttons.forEach((button) => {
+	button.addEventListener('click', () => playRound(button.id, getComputerChoice())); // addEventListener
+}); // forEach 
 
 game();
 
