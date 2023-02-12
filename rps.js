@@ -31,7 +31,7 @@ function rules(a, b){
 
 function playRound(playerSelection, computerSelection){
 	playerSelection = playerSelection.toLowerCase();
-	let winnerChoice; // holds the winning choice
+	let winnerChoice;
 	let winner;
 
 	console.log("Computer picks: " + computerSelection)
@@ -43,12 +43,11 @@ function playRound(playerSelection, computerSelection){
 		winnerChoice = rules(playerSelection, computerSelection);
 
 		// determine who picked the winning choice
-		if(computerSelection == winnerChoice) winner = "computer"
+		if (computerSelection == winnerChoice) winner = "computer"
 		else if (playerSelection == winnerChoice) winner = "player"
 	} 
 	return winner;
 }
-
 
 function game(){
 	let playerScore = 0;
