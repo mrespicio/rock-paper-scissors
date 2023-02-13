@@ -31,6 +31,15 @@ function rules(a, b){
 	return winnerChoice;
 }
 
+
+let buttonsContainer = document.getElementById('buttons-container');
+const buttons = buttonsContainer.querySelectorAll('button'); // select all playable buttons
+
+// add event listeners to buttons
+buttons.forEach((button) => {
+	button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
+});
+
 const body = document.body;
 const results = document.createElement('div');
 body.append(results);
@@ -66,6 +75,7 @@ function getScores(winner){
 
 let gameOver = document.createElement('p');
 let gameWinner;
+let gameStatus;
 
 //if any value in scores is 5 then end game
 function scoreChecker(scores){
@@ -75,22 +85,25 @@ function scoreChecker(scores){
 			else if(i == 2) gameWinner = "player"
 			gameOver.textContent = `Game Over! ${gameWinner} wins!`
 			results.append(gameOver);
-			removeEvent();
+			gameStatus = "done";
+			break;
 		}
-	} //
+	}
 }
+
 
 function removeEvent(){
 	console.log("game end")
 	buttons.forEach((button) => {
-		this.removeEventListener('click', playRound); 
+		button.removeEventListener('click', () => playRound);
+		console.log(button);
 	}); // forEach 
 }
 
 function playRound(playerSelection, computerSelection){
-
-	let winnerChoice; // holds the winning choice
+	let winnerChoice;
 	let winner;
+	if (gameStatus == "done"){  return false}
 
 	if (playerSelection === computerSelection) winner = "no one" // player and cpu picks same choice
 	else { // not a tie
@@ -102,9 +115,8 @@ function playRound(playerSelection, computerSelection){
 		else if (playerSelection == winnerChoice) winner = "player"
 	} 
 	displayResults(playerSelection, computerSelection, winner);
-	//return winner;
+	return winner;
 }
-
 
 const resetButton = document.getElementById('clear');
 resetButton.addEventListener('click', clearGame);
@@ -114,15 +126,10 @@ function clearGame(){
 	scores = [0, 0, 0]
 	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
 	gameOver.textContent = ''
+	gameStatus = '';
 }
 
-let buttonsContainer = document.getElementById('buttons-container');
-const buttons = buttonsContainer.querySelectorAll('button'); // select all buttons
 
-// add event listeners to buttons, button is parameters
-buttons.forEach((button) => {
-	button.addEventListener('click', () => playRound(button.id, getComputerChoice())); // addEventListener
-}); // forEach 
 
 
 /*
