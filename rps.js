@@ -31,7 +31,6 @@ function rules(a, b){
 	return winnerChoice;
 }
 
-
 let buttonsContainer = document.getElementById('buttons-container');
 const buttons = buttonsContainer.querySelectorAll('button'); // select all playable buttons
 
@@ -62,13 +61,12 @@ function displayResults(playerSelection, computerSelection, winner){
 }
 
 // 0 is tie, 1 is cpu, 2 is player
+// keeps track of scores, returns array with updated scores
 let scores = [0, 0, 0]
-
 function getScores(winner){
 	if(winner == "computer") scores[1]++;
 	else if(winner == "player") scores[2]++;
 	else scores[0]++;
-
 	scoreChecker(scores);
 	return scores;
 }
@@ -91,19 +89,10 @@ function scoreChecker(scores){
 	}
 }
 
-
-function removeEvent(){
-	console.log("game end")
-	buttons.forEach((button) => {
-		button.removeEventListener('click', () => playRound);
-		console.log(button);
-	}); // forEach 
-}
-
 function playRound(playerSelection, computerSelection){
 	let winnerChoice;
 	let winner;
-	if (gameStatus == "done"){  return false}
+	if (gameStatus == "done") return false
 
 	if (playerSelection === computerSelection) winner = "no one" // player and cpu picks same choice
 	else { // not a tie
@@ -128,9 +117,6 @@ function clearGame(){
 	gameOver.textContent = ''
 	gameStatus = '';
 }
-
-
-
 
 /*
 function game(){
