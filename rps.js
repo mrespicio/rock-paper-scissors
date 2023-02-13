@@ -38,7 +38,6 @@ body.append(results);
 let winnerText = document.createElement('p');
 
 let displayChoices = document.createElement('p');
-let displayTieScore = document.createElement('p');
 let displayScore = document.createElement('p');
 
 function displayResults(playerSelection, computerSelection, winner){
@@ -49,7 +48,7 @@ function displayResults(playerSelection, computerSelection, winner){
 	results.append(winnerText);
 
 	getScores(winner);
-	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}, Tied ${scores[0]} times`
+	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
 	results.append(displayScore);
 }
 
@@ -77,13 +76,15 @@ function scoreChecker(scores){
 			gameOver.textContent = `Game Over! ${gameWinner} wins!`
 			results.append(gameOver);
 			removeEvent();
-		} //if
-	} //for
+		}
+	} //
 }
 
 function removeEvent(){
 	console.log("game end")
-	//buttons.removeEventListener('');
+	buttons.forEach((button) => {
+		this.removeEventListener('click', playRound); 
+	}); // forEach 
 }
 
 function playRound(playerSelection, computerSelection){
@@ -105,7 +106,18 @@ function playRound(playerSelection, computerSelection){
 }
 
 
-const buttons = document.querySelectorAll('button'); // select all buttons
+const resetButton = document.getElementById('clear');
+resetButton.addEventListener('click', clearGame);
+
+function clearGame(){
+	console.log('game reset')
+	scores = [0, 0, 0]
+	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
+	gameOver.textContent = ''
+}
+
+let buttonsContainer = document.getElementById('buttons-container');
+const buttons = buttonsContainer.querySelectorAll('button'); // select all buttons
 
 // add event listeners to buttons, button is parameters
 buttons.forEach((button) => {
