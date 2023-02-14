@@ -33,9 +33,9 @@ buttons.forEach((button) => {
 	button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
 });
 
-const body = document.body;
-const results = document.createElement('div');
-body.append(results);
+const gameContainer = document.getElementById('game-container');
+const results = document.getElementById('results');
+gameContainer.append(results);
 
 let winnerText = document.createElement('p');
 
@@ -43,14 +43,14 @@ let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
 
 function displayResults(playerSelection, computerSelection, winner){
-	displayChoices.textContent = `You picked ${playerSelection}, Computer picked ${computerSelection}`
+	displayChoices.textContent = `You picked ${playerSelection} Computer picked ${computerSelection}`
 	results.append(displayChoices);
 
 	winnerText.textContent = `The winner of the round is ${winner}`;
 	results.append(winnerText);
 
 	getScores(winner);
-	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
+	displayScore.textContent = `Player score: ${scores[2]} Computer Score: ${scores[1]}`
 	results.append(displayScore);
 }
 
@@ -78,6 +78,7 @@ function scoreChecker(scores){
 			gameOver.textContent = `Game Over! ${gameWinner} wins!`
 			results.append(gameOver);
 			gameStatus = "done";
+			//alert('game over!');
 			break;
 		}
 	}
@@ -103,7 +104,7 @@ function playRound(playerSelection, computerSelection){
 	return winner;
 }
 
-const resetButton = document.getElementById('clear');
+const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', clearGame);
 
 function clearGame(){
@@ -112,6 +113,6 @@ function clearGame(){
 	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
 	gameOver.textContent = ''
 	gameStatus = '';
+	displayChoices.textContent = ''
+	winnerText.textContent = ''
 }
-
-
