@@ -15,13 +15,6 @@ function getComputerChoice(){
 	return choice;
 }
 
-/*
-function getPlayerChoice(){
-	let input = prompt().toLowerCase();
-	return input;
-}
-*/
-
 function rules(a, b){
 	let winnerChoice;
 	if((a == "rock" || b == "rock") && (a == "scissors" || b == "scissors")) winnerChoice = "rock" // rock vs scissors > rock wins
@@ -32,21 +25,31 @@ function rules(a, b){
 }
 
 let buttonsContainer = document.getElementById('buttons-container');
-const buttons = buttonsContainer.querySelectorAll('button'); // select all playable buttons
+const buttons = buttonsContainer.querySelectorAll('img'); // select all playable buttons
 
 // add event listeners to buttons
 buttons.forEach((button) => {
 	button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
 });
 
-const body = document.body;
-const results = document.createElement('div');
-body.append(results);
+const gameContainer = document.getElementById('game-container');
+const results = document.getElementById('results');
+results.style.marginTop = '40px';
+results.style.fontSize = '24px'
+gameContainer.append(results);
 
 let winnerText = document.createElement('p');
 
 let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
+
+const resetButton = document.createElement('button');
+resetButton.textContent = 'play again'
+resetButton.style.backgroundColor = '#ffffff';
+resetButton.style.fontSize = '18px'
+resetButton.style.color = '#4c5454';
+resetButton.style.padding = '1em'
+resetButton.addEventListener('click', clearGame);
 
 function displayResults(playerSelection, computerSelection, winner){
 	displayChoices.textContent = `You picked ${playerSelection}, Computer picked ${computerSelection}`
@@ -56,7 +59,7 @@ function displayResults(playerSelection, computerSelection, winner){
 	results.append(winnerText);
 
 	getScores(winner);
-	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
+	displayScore.textContent = `Player score: ${scores[2]} Computer Score: ${scores[1]}`
 	results.append(displayScore);
 }
 
@@ -84,16 +87,16 @@ function scoreChecker(scores){
 			gameOver.textContent = `Game Over! ${gameWinner} wins!`
 			results.append(gameOver);
 			gameStatus = "done";
+			gameContainer.append(resetButton);
+			//alert('game over!');
 			break;
 		}
 	}
 }
 
 function playRound(playerSelection, computerSelection){
-<<<<<<< HEAD
 	playerSelection = playerSelection.toLowerCase();
-=======
->>>>>>> gui
+
 	let winnerChoice;
 	let winner;
 	if (gameStatus == "done") return false
@@ -111,51 +114,14 @@ function playRound(playerSelection, computerSelection){
 	return winner;
 }
 
-<<<<<<< HEAD
-=======
-const resetButton = document.getElementById('clear');
-resetButton.addEventListener('click', clearGame);
-
 function clearGame(){
 	console.log('game reset')
+	gameContainer.removeChild(resetButton);
 	scores = [0, 0, 0]
 	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
 	gameOver.textContent = ''
 	gameStatus = '';
+	displayChoices.textContent = ''
+	winnerText.textContent = ''
+	displayScore.textContent = ''
 }
-
-/*
->>>>>>> gui
-function game(){
-	let playerScore = 0;
-	let computerScore = 0;
-	let tieScore = 0;
-
-	while(playerScore < 5 && computerScore < 5){
-		let winner = playRound(getPlayerChoice(), getComputerChoice());
-
-		if(winner == "computer") computerScore++;
-		else if(winner == "player") playerScore++;
-		else tieScore++;
-
-		if(winner) console.log(winner + " wins!");
-		else console.log("it's a tie!");
-
-		console.log("Current scoreboard: ");
-		console.log("Computer score: " + computerScore);
-		console.log("Player score: " + playerScore);
-	}
-	//printResults(computerScore, playerScore, tieScore);
-}
-
-/*
-function printResults(computerScore, playerScore, tieScore){
-	console.log("Final results: ");
-	console.log("Computer score: " + computerScore);
-	console.log("Player Score: " + playerScore);
-	console.log("You tied: " + tieScore + " time(s)")
-} game */
-
-
-//game();
-
