@@ -27,7 +27,6 @@ function rules(a, b){
 let buttonsContainer = document.getElementById('buttons-container');
 const buttons = buttonsContainer.querySelectorAll('img'); // select all playable buttons
 
-
 // add event listeners to buttons
 buttons.forEach((button) => {
 	button.addEventListener('click', () => playRound(button.id, getComputerChoice()));
@@ -35,6 +34,8 @@ buttons.forEach((button) => {
 
 const gameContainer = document.getElementById('game-container');
 const results = document.getElementById('results');
+results.style.marginTop = '40px';
+results.style.fontSize = '24px'
 gameContainer.append(results);
 
 let winnerText = document.createElement('p');
@@ -42,8 +43,16 @@ let winnerText = document.createElement('p');
 let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
 
+const resetButton = document.createElement('button');
+resetButton.textContent = 'play again'
+resetButton.style.backgroundColor = '#ffffff';
+resetButton.style.fontSize = '18px'
+resetButton.style.color = '#4c5454';
+resetButton.style.padding = '1em'
+resetButton.addEventListener('click', clearGame);
+
 function displayResults(playerSelection, computerSelection, winner){
-	displayChoices.textContent = `You picked ${playerSelection} Computer picked ${computerSelection}`
+	displayChoices.textContent = `You picked ${playerSelection}, Computer picked ${computerSelection}`
 	results.append(displayChoices);
 
 	winnerText.textContent = `The winner of the round is ${winner}`;
@@ -78,6 +87,7 @@ function scoreChecker(scores){
 			gameOver.textContent = `Game Over! ${gameWinner} wins!`
 			results.append(gameOver);
 			gameStatus = "done";
+			gameContainer.append(resetButton);
 			//alert('game over!');
 			break;
 		}
@@ -104,15 +114,14 @@ function playRound(playerSelection, computerSelection){
 	return winner;
 }
 
-const resetButton = document.getElementById('reset');
-resetButton.addEventListener('click', clearGame);
-
 function clearGame(){
 	console.log('game reset')
+	gameContainer.removeChild(resetButton);
 	scores = [0, 0, 0]
 	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
 	gameOver.textContent = ''
 	gameStatus = '';
 	displayChoices.textContent = ''
 	winnerText.textContent = ''
+	displayScore.textContent = ''
 }
