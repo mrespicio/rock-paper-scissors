@@ -10,7 +10,7 @@ Creating the game in the browser console allowed me to focus on practicing using
 
 
 ## Phase 2: Create a simple GUI
-The GUI was implemented using DOM manipulation. Using the logic from phase 1, I was able to concentrate on creating buttons that behaved as intended using event listeners.
+The GUI was implemented using DOM manipulation. Using the logic from phase 1, I was able to concentrate on creating buttons that behaved as intended using event listeners. Also practiced branching to not mess with my code from phase 1.
 
 ## Phase 3: Stylized the UI
 Make the interface look pretty using CSS!
