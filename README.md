@@ -2,6 +2,8 @@
 
 [Live Demo](https://mrespicio.github.io/rock-paper-scissors/)
 
+![image rock paper scissors game](preview/preview.png)
+
 ## Project Goals
 Implement a simple rock paper scissors game.
 
