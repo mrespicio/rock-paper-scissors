@@ -1,7 +1,9 @@
 # rock-paper-scissors
 
+[Live Demo](https://mrespicio.github.io/rock-paper-scissors/)
+
 ## Project Goals
-* Implement a simple rock paper scissors game.
+Implement a simple rock paper scissors game.
 
 ## Phase 1: Create game in browser console
 Creating the game in the browser console allowed me to focus on practicing using JavaScript and implement the game's rules and logic.
