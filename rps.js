@@ -38,25 +38,28 @@ results.style.marginTop = '40px';
 results.style.fontSize = '24px'
 gameContainer.append(results);
 
-let winnerText = document.createElement('p');
-
+let roundWinner = document.createElement('p');
 let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
 
+// resetButton resets the game after a winner is found
 const resetButton = document.createElement('button');
-resetButton.textContent = 'play again'
-resetButton.style.backgroundColor = '#ffffff';
-resetButton.style.fontSize = '18px'
-resetButton.style.color = '#4c5454';
-resetButton.style.padding = '1em'
+function styleReset(){
+	resetButton.textContent = 'play again'
+	resetButton.style.backgroundColor = '#ffffff';
+	resetButton.style.fontSize = '18px'
+	resetButton.style.color = '#4c5454';
+	resetButton.style.padding = '1em'
+}
+styleReset();
 resetButton.addEventListener('click', clearGame);
 
 function displayResults(playerSelection, computerSelection, winner){
-	displayChoices.textContent = `You picked ${playerSelection}, Computer picked ${computerSelection}`
+	displayChoices.textContent = `You picked ${playerSelection} | Computer picked ${computerSelection}`
 	results.append(displayChoices);
 
-	winnerText.textContent = `The winner of the round is ${winner}`;
-	results.append(winnerText);
+	roundWinner.textContent = `The winner of the round is ${winner}`;
+	results.append(roundWinner);
 
 	getScores(winner);
 	displayScore.textContent = `Player score: ${scores[2]} Computer Score: ${scores[1]}`
@@ -88,14 +91,13 @@ function scoreChecker(scores){
 			results.append(gameOver);
 			gameStatus = "done";
 			gameContainer.append(resetButton);
-			//alert('game over!');
 			break;
 		}
 	}
 }
 
 function playRound(playerSelection, computerSelection){
-	playerSelection = playerSelection.toLowerCase();
+	//playerSelection = playerSelection.toLowerCase();
 
 	let winnerChoice;
 	let winner;
@@ -111,14 +113,13 @@ function playRound(playerSelection, computerSelection){
 		else if (playerSelection == winnerChoice) winner = "player"
 	} 
 	displayResults(playerSelection, computerSelection, winner);
-	return winner;
 }
 
 function clearGame(){
 	console.log('game reset')
 	gameContainer.removeChild(resetButton);
 	scores = [0, 0, 0]
-	displayScore.textContent = `Player score: ${scores[2]}, Computer Score: ${scores[1]}`
+	displayScore.textContent = `Player score: ${scores[2]} | Computer Score: ${scores[1]}`
 	gameOver.textContent = ''
 	gameStatus = '';
 	displayChoices.textContent = ''
