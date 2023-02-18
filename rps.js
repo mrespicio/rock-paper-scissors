@@ -42,16 +42,11 @@ let roundWinner = document.createElement('p');
 let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
 
+
 // resetButton resets the game after a winner is found
 const resetButton = document.createElement('button');
-function styleReset(){
-	resetButton.textContent = 'play again'
-	resetButton.style.backgroundColor = '#ffffff';
-	resetButton.style.fontSize = '18px'
-	resetButton.style.color = '#4c5454';
-	resetButton.style.padding = '1em'
-}
-styleReset();
+resetButton.textContent = 'play again'
+resetButton.classList.add('reset-btn')
 resetButton.addEventListener('click', clearGame);
 
 function displayResults(playerSelection, computerSelection, winner){

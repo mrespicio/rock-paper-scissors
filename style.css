@@ -49,3 +49,10 @@ h1{
 .btn-img:hover{
 	border: solid #4c5454 4px;
 }
+
+.reset-btn{
+	background-color: #ffffff;
+	font-size: 18px;
+	color: #4c5454;
+	padding: 1em;
+}
