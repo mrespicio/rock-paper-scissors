@@ -42,7 +42,6 @@ let roundWinner = document.createElement('p');
 let displayChoices = document.createElement('p');
 let displayScore = document.createElement('p');
 
-
 // resetButton resets the game after a winner is found
 const resetButton = document.createElement('button');
 resetButton.textContent = 'play again'
